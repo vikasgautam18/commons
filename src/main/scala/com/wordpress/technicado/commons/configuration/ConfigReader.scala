@@ -24,4 +24,7 @@ object ConfigReader {
 
   def getLong(propertName: String): Long =
     properties.getLong(propertName)
+
+  def getInt(propertName: String): Int =
+    properties.getInt(propertName)
 }
