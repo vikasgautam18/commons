@@ -5,20 +5,20 @@ import java.net._
 
 import scala.io.Source
 
-object WriteToSerialPort {
+class WriteToSerialPort(host: String, port: Int) {
 
-  val socket: Socket = new Socket("127.0.0.1", 9999)
+  val socket: Socket = new Socket(host, port)
   val out: PrintWriter = new PrintWriter(socket.getOutputStream(), true)
 
-   def writeSocket(host: String, port: Int, message: String) = {
+   def writeSocket(message: String) = {
     out.println(message)
   }
-   def readFileToSocket(host:String, port: Int, location: String, delay: Long) = {
+   def readFileToSocket(location: String, delay: Long) = {
      val bufferedSource = Source.fromFile(location)
      for (line <- bufferedSource.getLines) {
        println(line)
        Thread.sleep(delay)
-       writeSocket(host, port, line)
+       writeSocket(line)
      }
 
      bufferedSource.close
